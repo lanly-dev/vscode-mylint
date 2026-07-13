@@ -15,17 +15,53 @@
     "commands": [
       {
         "command": "myeslint.helloWorld",
-        "title": "Hello World"
+        "title": "MyEslint: Hello World"
+      },
+      {
+        "command": "myeslint.lintFile",
+        "title": "MyEslint: Lint Current File",
+        "category": "MyEslint"
+      },
+      {
+        "command": "myeslint.applyConfig",
+        "title": "MyEslint: Apply Config to Workspace",
+        "category": "MyEslint"
+      },
+      {
+        "command": "myeslint.generateConfig",
+        "title": "MyEslint: Generate JSON Config",
+        "category": "MyEslint"
+      },
+      {
+        "command": "myeslint.lintAll",
+        "title": "MyEslint: Lint All Files",
+        "category": "MyEslint"
+      },
+      {
+        "command": "myeslint.showHelp",
+        "title": "MyEslint: Show Help",
+        "category": "MyEslint"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "myeslint.lintFile",
+          "group": "navigation",
+          "when": "editorTextFocus && editorLangId =~ /^(typescript|typescriptreact|javascript|javascriptreact)$/"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
     "watch": "webpack --watch",
-    "package": "webpack --mode production --devtool hidden-source-map"
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "efix": "eslint . --fix"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "22.x",
     "@types/vscode": "^1.125.0",
     "eslint": "^9.39.3",
