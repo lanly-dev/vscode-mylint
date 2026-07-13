@@ -1,9 +1,8 @@
 import typescriptEslint from 'typescript-eslint'
 import stylistic from '@stylistic/eslint-plugin'
 
-
 export default [{
-  files: ['**/*.ts']
+  files: ['**/*.ts', '**/*.js']
 }, {
   plugins: {
     '@typescript-eslint': typescriptEslint.plugin,
@@ -15,8 +14,11 @@ export default [{
     ecmaVersion: 2022,
     sourceType: 'module',
     globals: {
+      __dirname: 'readonly',
       console: 'readonly',
-      process: 'readonly'
+      module: 'readonly',
+      process: 'readonly',
+      require: 'readonly'
     }
   },
 
