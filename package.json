@@ -22,8 +22,8 @@
         "title": "MyEslint: Reset Configuration File to Extension Defaults"
       },
       {
-        "command": "myeslint.lintDirectory",
-        "title": "MyEslint: Lint Directory"
+        "command": "myeslint.lintFile",
+        "title": "MyEslint: Lint File"
       }
     ],
     "menus": {
