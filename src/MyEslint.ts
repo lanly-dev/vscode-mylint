@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
-import * as path from 'path'
 import { ESLint } from 'eslint'
+import { fileURLToPath } from 'url'
 
 export default class MyEslint {
   static async openConfig(resourceUri: vscode.Uri): Promise<void> {
@@ -47,9 +47,10 @@ export default class MyEslint {
 
     const configFileUri = vscode.Uri.joinPath(resourceUri, 'eslint.config.js')
 
+
     // Load the ESLint configuration from bundled eslint.config.js (CommonJS format)
     const linter = new ESLint({
-      overrideConfigFile: configFileUri.path,
+      overrideConfigFile: configFileUri.fsPath,
       fix: true,
       allowInlineConfig: false
     })
@@ -57,7 +58,7 @@ export default class MyEslint {
     let results: ESLint.LintResult[] | undefined
     // Lint and auto-fix the file content using flat config
     try {
-      results = await linter.lintText(code, {})
+      results = await linter.lintText(code)
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to lint file: ${error}`)
       return
