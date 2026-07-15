@@ -1,8 +1,8 @@
 import typescriptEslint from 'typescript-eslint'
 import stylistic from '@stylistic/eslint-plugin'
 
-export default [{
-  files: ['**/*.ts', '**/*.js']
+module.exports = [{
+  files: ['**/*.ts']
 }, {
   plugins: {
     '@typescript-eslint': typescriptEslint.plugin,

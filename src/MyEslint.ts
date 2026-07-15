@@ -1,7 +1,8 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
-import * as path from 'path'
-import { ESLint } from 'eslint'
+import { ESLint, Linter } from 'eslint'
+import typescriptEslint from 'typescript-eslint'
+import stylistic from '@stylistic/eslint-plugin'
 
 export default class MyEslint {
   static async openConfig(resourceUri: vscode.Uri): Promise<void> {
@@ -45,11 +46,56 @@ export default class MyEslint {
 
     const code = document.getText()
 
-    const configFileUri = vscode.Uri.joinPath(resourceUri, 'eslint.config.js')
+    // const configFileUri = vscode.Uri.joinPath(resourceUri, 'eslint.config.js')
+    // const config = await import(configPath)
 
-    // Load the ESLint configuration from bundled eslint.config.js (CommonJS format)
+
+    // Build ESLint config programmatically so plugins resolve from the bundled extension,
+    // not from the config file's directory (which has no node_modules).
+    const overrideConfig: Linter.Config[] = [
+      { files: ['**/*.ts', '**/*.js'] },
+      {
+        plugins: {
+          '@typescript-eslint': typescriptEslint.plugin,
+          '@stylistic': stylistic
+        },
+        languageOptions: {
+          parser: typescriptEslint.parser,
+          ecmaVersion: 2022,
+          sourceType: 'module',
+          globals: {
+            __dirname: 'readonly',
+            console: 'readonly',
+            module: 'readonly',
+            process: 'readonly',
+            require: 'readonly'
+          }
+        },
+        rules: {
+          '@typescript-eslint/naming-convention': ['warn', { selector: 'import', format: ['camelCase', 'PascalCase'] }],
+          '@stylistic/indent': ['error', 2],
+          'comma-dangle': ['error', 'never'],
+          'eol-last': ['error', 'always'],
+          'no-throw-literal': 'warn',
+          'quote-props': ['error', 'as-needed'],
+          'constructor-super': 'warn',
+          'no-const-assign': 'warn',
+          'no-this-before-super': 'warn',
+          'no-undef': 'warn',
+          'no-unreachable': 'warn',
+          'no-unused-vars': 'warn',
+          'valid-typeof': 'warn',
+          curly: ['error', 'multi-or-nest'],
+          eqeqeq: 'error',
+          quotes: ['error', 'single', { allowTemplateLiterals: true }],
+          semi: ['error', 'never']
+        }
+      }
+    ]
+
     const linter = new ESLint({
-      overrideConfigFile: configFileUri.path,
+      overrideConfigFile: true, // disable auto-discovery, use only overrideConfig
+      overrideConfig,
       fix: true,
       allowInlineConfig: false
     })
@@ -57,7 +103,7 @@ export default class MyEslint {
     let results: ESLint.LintResult[] | undefined
     // Lint and auto-fix the file content using flat config
     try {
-      results = await linter.lintText(code, {})
+      results = await linter.lintText(code)
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to lint file: ${error}`)
       return
