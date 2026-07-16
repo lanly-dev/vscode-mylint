@@ -1,8 +1,7 @@
 import * as vscode from 'vscode'
 import * as fs from 'fs'
-import { ESLint, Linter } from 'eslint'
-import typescriptEslint from 'typescript-eslint'
-import stylistic from '@stylistic/eslint-plugin'
+import { ESLint } from 'eslint'
+import configs from './Configs'
 
 export default class MyLint {
   static async openConfig(resourceUri: vscode.Uri): Promise<void> {
@@ -30,7 +29,7 @@ export default class MyLint {
     vscode.window.showInformationMessage('ESLint config reset to default')
   }
 
-  static async lintFile(resourceUri: vscode.Uri): Promise<void> {
+  static async lintFile(): Promise<void> {
     console.debug('Starting linting process')
     const editor = vscode.window.activeTextEditor
     if (!editor) {
@@ -45,52 +44,10 @@ export default class MyLint {
     }
 
     const code = document.getText()
-
-    // Build ESLint config programmatically so plugins resolve from the bundled extension,
-    // not from the config file's directory (which has no node_modules).
-    const overrideConfig: Linter.Config[] = [
-      { files: ['**/*.ts', '**/*.js'] },
-      {
-        plugins: {
-          '@typescript-eslint': typescriptEslint.plugin,
-          '@stylistic': stylistic
-        },
-        languageOptions: {
-          parser: typescriptEslint.parser,
-          ecmaVersion: 2022,
-          sourceType: 'module',
-          globals: {
-            __dirname: 'readonly',
-            console: 'readonly',
-            module: 'readonly',
-            process: 'readonly',
-            require: 'readonly'
-          }
-        },
-        rules: {
-          '@typescript-eslint/naming-convention': ['warn', { selector: 'import', format: ['camelCase', 'PascalCase'] }],
-          '@stylistic/indent': ['error', 2],
-          'comma-dangle': ['error', 'never'],
-          'eol-last': ['error', 'always'],
-          'no-throw-literal': 'warn',
-          'quote-props': ['error', 'as-needed'],
-          'constructor-super': 'warn',
-          'no-const-assign': 'warn',
-          'no-this-before-super': 'warn',
-          'no-undef': 'warn',
-          'no-unreachable': 'warn',
-          'no-unused-vars': 'warn',
-          'valid-typeof': 'warn',
-          curly: ['error', 'multi-or-nest'],
-          eqeqeq: 'error',
-          quotes: ['error', 'single', { allowTemplateLiterals: true }],
-          semi: ['error', 'never']
-        }
-      }
-    ]
+    const overrideConfig = await configs()
 
     const linter = new ESLint({
-      overrideConfigFile: true, // disable auto-discovery, use only overrideConfig
+      overrideConfigFile: true,
       overrideConfig,
       fix: true,
       allowInlineConfig: false
