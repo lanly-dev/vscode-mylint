@@ -1,28 +1,29 @@
-import * as vscode from 'vscode'
+import { commands, Range, Uri, workspace, WorkspaceEdit, window, TextEdit } from 'vscode'
+const { showTextDocument, showErrorMessage, showInformationMessage } = window
 import { ESLint, Linter } from 'eslint'
 import configs from './Configs'
 
 export default class MyLint {
-  static async openConfig(resourceUri: vscode.Uri): Promise<void> {
-    const configFileUri = vscode.Uri.joinPath(resourceUri, '..', 'src', 'Configs.ts')
-    const doc = await vscode.workspace.openTextDocument(configFileUri)
-    await vscode.window.showTextDocument(doc, { preview: true, preserveFocus: true })
+  static async openConfig(resourceUri: Uri): Promise<void> {
+    const configFileUri = Uri.joinPath(resourceUri, '..', 'src', 'Configs.ts')
+    const doc = await workspace.openTextDocument(configFileUri)
+    await showTextDocument(doc, { preview: true, preserveFocus: true })
   }
 
   static async openSettings(): Promise<void> {
-    await vscode.commands.executeCommand('workbench.action.openSettings', 'mylint')
+    await commands.executeCommand('workbench.action.openSettings', 'mylint')
   }
 
   static async formatFile(): Promise<void> {
-    const editor = vscode.window.activeTextEditor
+    const editor = window.activeTextEditor
     if (!editor) {
-      vscode.window.showErrorMessage('No active text editor to format')
+      showErrorMessage('No active text editor to format')
       return
     }
 
     const document = editor.document
     if (document.languageId !== 'typescript' && document.languageId !== 'javascript') {
-      vscode.window.showErrorMessage('ESLint formatting is only supported for TypeScript and JavaScript files')
+      showErrorMessage('ESLint formatting is only supported for TypeScript and JavaScript files')
       return
     }
 
@@ -30,7 +31,7 @@ export default class MyLint {
     const overrideConfig = await configs()
 
     // If the user has defined any rules in settings, replace the defaults entirely
-    const userRules = vscode.workspace.getConfiguration('mylint').get<Linter.RulesRecord>('rules', {})
+    const userRules = workspace.getConfiguration('mylint').get<Linter.RulesRecord>('rules', {})
     if (Object.keys(userRules).length > 0) {
       const rulesConfig = overrideConfig[overrideConfig.length - 1]
       rulesConfig.rules = userRules
@@ -48,11 +49,11 @@ export default class MyLint {
     try {
       results = await linter.lintText(code)
     } catch (error) {
-      vscode.window.showErrorMessage(`Failed to lint file: ${error}`)
+      showErrorMessage(`Failed to lint file: ${error}`)
       return
     }
     if (!results || results.length === 0) {
-      vscode.window.showInformationMessage('No ESLint issues found in file')
+      showInformationMessage('No ESLint issues found in file')
       return
     }
 
@@ -60,19 +61,19 @@ export default class MyLint {
 
     // Write fixed output back to the document if there are fixes available
     if (result.output && result.output !== code) {
-      const fullRange = new vscode.Range(
+      const fullRange = new Range(
         document.positionAt(0),
         document.positionAt(document.getText().length)
       )
-      const edit = new vscode.WorkspaceEdit()
-      edit.set(document.uri, [vscode.TextEdit.replace(fullRange, result.output)])
-      await vscode.workspace.applyEdit(edit)
+      const edit = new WorkspaceEdit()
+      edit.set(document.uri, [TextEdit.replace(fullRange, result.output)])
+      await workspace.applyEdit(edit)
 
-      if (result.messages.length > 0) vscode.window.showInformationMessage(`Fixed ESLint issues. ${result.messages.length} issue(s) remain`)
-      else vscode.window.showInformationMessage('ESLint auto-fix completed successfully')
+      if (result.messages.length > 0) showInformationMessage(`Fixed ESLint issues. ${result.messages.length} issue(s) remain`)
+      else showInformationMessage('ESLint auto-fix completed successfully')
     }
     else if (result.output === code)
-      vscode.window.showInformationMessage(`${result.messages.length} ESLint issue(s) could not be auto-fixed`)
+      showInformationMessage(`${result.messages.length} ESLint issue(s) could not be auto-fixed`)
 
     // Log remaining issues
     if (result.messages.length > 0) {
