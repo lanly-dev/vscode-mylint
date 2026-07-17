@@ -2,12 +2,23 @@
   "name": "mylint",
   "displayName": "MyLint",
   "description": "Mostly for virtual file",
+  "publisher": "lanly-dev",
   "version": "0.0.1",
+  "sponsor": {
+    "url": "https://github.com/sponsors/lanly-dev"
+  },
   "engines": {
-    "vscode": "^1.125.0"
+    "vscode": "^1.107.0"
   },
   "categories": [
-    "Other"
+    "Formatters",
+    "Linters"
+  ],
+  "keywords": [
+    "eslint",
+    "formatter",
+    "javascript",
+    "typescript"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -54,13 +65,16 @@
     "compile": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
-    "efix": "eslint . --fix"
+    "vsce-package": "vsce package",
+    "efix": "eslint . --fix",
+    "sfix": "standard --fix"
   },
   "devDependencies": {
     "@types/node": "26.x",
-    "@types/vscode": "^1.125.0",
+    "@types/vscode": "^1.107.0",
     "copy-webpack-plugin": "^14.0.0",
     "eslint": "^10.7.0",
+    "standard": "^17.1.2",
     "ts-loader": "^9.6.2",
     "typescript": "5.8.3",
     "typescript-eslint": "^8.64.0",

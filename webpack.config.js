@@ -1,9 +1,9 @@
-//@ts-check
+// @ts-check
 
 'use strict'
 const path = require('path')
 
-//@ts-check
+// @ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
 /** @type WebpackConfig */
@@ -51,4 +51,4 @@ const extensionConfig = {
     level: 'log' // enables logging required for problem matchers
   }
 }
-module.exports = [ extensionConfig ]
+module.exports = [extensionConfig]

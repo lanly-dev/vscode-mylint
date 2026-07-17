@@ -1,21 +1,17 @@
-.vscode/**
-.vscode-test/**
-out/**
-src/**
 .gitignore
-.yarnrc
-webpack.config.js
-vsc-extension-quickstart.md
-**/tsconfig.json
-**/eslint.config.mjs
+.vscode
 **/*.map
 **/*.ts
-**/.vscode-test.*
+**/eslint.config.mjs
+**/tsconfig.json
+src
+vsc-extension-quickstart.md
+webpack.config.js
 
 # Exclude dev-only node_modules that are not needed at runtime
 node_modules/.bin/**
-node_modules/ts-loader/**
-node_modules/webpack/**
-node_modules/webpack-cli/**
-node_modules/copy-webpack-plugin/**
 node_modules/@types/**
+node_modules/copy-webpack-plugin/**
+node_modules/ts-loader/**
+node_modules/webpack-cli/**
+node_modules/webpack/**
