@@ -7,9 +7,8 @@ export function activate(context: vscode.ExtensionContext) {
   const resourceUri = getResourceUri(context)
   const rc = vscode.commands.registerCommand
   const d1 = rc('mylint.openConfig', () => MyLint.openConfig(resourceUri))
-  const d2 = rc('mylint.resetConfig', () => MyLint.resetConfig(resourceUri))
-  const d3 = rc('mylint.lintFile', () => MyLint .lintFile())
-  context.subscriptions.push(d1, d2, d3)
+  const d2 = rc('mylint.formatFile', () => MyLint.formatFile())
+  context.subscriptions.push(d1, d2)
 }
 
 function getResourceUri(context: vscode.ExtensionContext): vscode.Uri {

@@ -10,36 +10,17 @@ export default class MyLint {
     await vscode.window.showTextDocument(doc, { preview: false })
   }
 
-  static async resetConfig(resourceUri: vscode.Uri): Promise<void> {
-    const configFileUri = vscode.Uri.joinPath(resourceUri, 'eslint.config.js')
-    const backupConfigFileUri = vscode.Uri.joinPath(resourceUri, 'eslint.bk.js')
-    if (!fs.existsSync(backupConfigFileUri.fsPath)) {
-      vscode.window.showErrorMessage('Failed to reset: default config file not found in extension resources')
-      return
-    }
-    // Copy content from eslint.bk.js to the eslint.config.js file
-    try {
-      fs.mkdirSync(vscode.Uri.joinPath(configFileUri, '..').fsPath, { recursive: true })
-      const backupContent = fs.readFileSync(backupConfigFileUri.fsPath, 'utf-8')
-      fs.writeFileSync(configFileUri.fsPath, backupContent, 'utf-8')
-    } catch {
-      vscode.window.showErrorMessage('Failed to reset: could not write default config to workspace')
-      return
-    }
-    vscode.window.showInformationMessage('ESLint config reset to default')
-  }
+  static async formatFile(): Promise<void> {
 
-  static async lintFile(): Promise<void> {
-    console.debug('Starting linting process')
     const editor = vscode.window.activeTextEditor
     if (!editor) {
-      vscode.window.showErrorMessage('No active text editor to lint')
+      vscode.window.showErrorMessage('No active text editor to format')
       return
     }
 
     const document = editor.document
     if (document.languageId !== 'typescript' && document.languageId !== 'javascript') {
-      vscode.window.showErrorMessage('ESLint linting is only supported for TypeScript and JavaScript files')
+      vscode.window.showErrorMessage('ESLint formatting is only supported for TypeScript and JavaScript files')
       return
     }
 
@@ -86,8 +67,7 @@ export default class MyLint {
       await vscode.workspace.applyEdit(edit)
 
       if (result.messages.length > 0) vscode.window.showInformationMessage(`Fixed ESLint issues. ${result.messages.length} issue(s) remain`)
-      else
-        vscode.window.showInformationMessage('ESLint auto-fix completed successfully')
+      else vscode.window.showInformationMessage('ESLint auto-fix completed successfully')
     }
     else if (result.output === code)
       vscode.window.showInformationMessage(`${result.messages.length} ESLint issue(s) could not be auto-fixed`)

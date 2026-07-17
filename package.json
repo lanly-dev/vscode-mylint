@@ -9,7 +9,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
@@ -18,12 +20,8 @@
         "title": "mylint: Open Global ESLint Configuration File"
       },
       {
-        "command": "mylint.resetConfig",
-        "title": "mylint: Reset Configuration File to Extension Defaults"
-      },
-      {
-        "command": "mylint.lintFile",
-        "title": "mylint: Lint File"
+        "command": "mylint.formatFile",
+        "title": "mylint: Format File"
       }
     ],
     "configuration": {
@@ -40,8 +38,8 @@
     "menus": {
       "editor/context": [
         {
-          "command": "mylint.lintFile",
-          "group": "navigation",
+          "command": "mylint.formatFile",
+          "group": "1_modification",
           "when": "editorTextFocus && editorLangId =~ /^(typescript|javascript|json|jsonc)$/"
         }
       ]
