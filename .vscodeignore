@@ -10,25 +10,43 @@ src/
 vsc-extension-quickstart.md
 webpack.config.js
 
-# Development-only node_modules
+# Dev-only packages (safety net if present during packaging)
+node_modules/@types/**
+node_modules/@vscode/**
+node_modules/ovsx/**
+node_modules/standard/**
+node_modules/standard-engine/**
+node_modules/ts-loader/**
+node_modules/typescript/bin/**
+node_modules/webpack/**
+node_modules/webpack-cli/**
+node_modules/webpack-*/**
+
+# Runtime-only trimming for shipped dependencies
+node_modules/@eslint/**/dist/esm/**
+node_modules/**/*.cts
+node_modules/**/*.mts
+node_modules/**/.cache/**
+node_modules/**/.editorconfig
+node_modules/**/.nyc_output/**
+node_modules/**/.prettierrc*
 node_modules/**/__tests__/**
 node_modules/**/.eslintrc*
 node_modules/**/.github/**
 node_modules/**/.npmignore
 node_modules/**/.travis.yml
-node_modules/**/*.d.ts
-node_modules/**/*.map
-node_modules/**/*.ts
 node_modules/**/benchmark/**
 node_modules/**/CHANGELOG*
 node_modules/**/changelog*
 node_modules/**/CONTRIBUTING*
+node_modules/**/coverage/**
 node_modules/**/docs/**
 node_modules/**/example/**
 node_modules/**/examples/**
 node_modules/**/jest.config*
 node_modules/**/LICENSE*
 node_modules/**/license*
+node_modules/**/Makefile
 node_modules/**/package-lock.json
 node_modules/**/README*
 node_modules/**/readme*
@@ -36,4 +54,18 @@ node_modules/**/rollup.config*
 node_modules/**/spec/**
 node_modules/**/test/**
 node_modules/**/tests/**
+node_modules/**/tsconfig*.json
 node_modules/**/yarn.lock
+node_modules/**/*.d.ts
+node_modules/**/*.map
+node_modules/**/*.ts
+node_modules/typescript/lib/_tsc.js
+node_modules/typescript/lib/_tsserver.js
+node_modules/typescript/lib/_typingsInstaller.js
+node_modules/typescript/lib/**/diagnosticMessages.generated.json
+node_modules/typescript/lib/tsc.js
+node_modules/typescript/lib/tsserver.js
+node_modules/typescript/lib/tsserverlibrary.js
+node_modules/typescript/lib/typingsInstaller.js
+node_modules/typescript/lib/typesMap.json
+node_modules/typescript/lib/watchGuard.js
