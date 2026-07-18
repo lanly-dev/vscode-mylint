@@ -1,5 +1,5 @@
 # MyLint
-A VS Code extension for formatting virtual files and small TS/JS scripts without needing a local ESLint setup.
+A formatter extension that uses ESLint, intended for virtual files and small TS/JS scripts without requiring a local ESLint setup.
 <a href="https://marketplace.visualstudio.com/items?itemName=lanly-dev.mylint" target="_blank">
   <img src='https://code.visualstudio.com/favicon.ico' width='13'/>
 </a>

@@ -12,9 +12,12 @@
 	"js/ts.tsc.autoDetect": "off",
 	"cSpell.words": [
 		"efix",
+		"Kiro",
 		"lanly",
 		"mylint",
-		"sfix"
+		"sfix",
+		"vscodeignore",
+		"vsixmanifest"
 	],
 	"akazas-love.snowInEditor": false,
 	"editor.rulers": [120]

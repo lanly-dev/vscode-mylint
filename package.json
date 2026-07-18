@@ -76,18 +76,17 @@
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint-plugin-jsonc": "3.3.0"
+    "eslint": "^10.7.0",
+    "typescript-eslint": "^8.64.0"
   },
   "devDependencies": {
     "@types/node": "26.x",
     "@types/vscode": "^1.107.0",
     "copy-webpack-plugin": "^14.0.0",
-    "eslint": "^10.7.0",
     "ovsx": "^1.0.2",
     "standard": "^17.1.2",
     "ts-loader": "^9.6.2",
     "typescript": "5.8.3",
-    "typescript-eslint": "^8.64.0",
     "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1"
   },

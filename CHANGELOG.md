@@ -4,14 +4,38 @@ All notable changes to the "mylint" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [TODO]
+- Underline linting
+- Show warn/error
+- Update to Typescript 7
+- Try Esbuild?
 
+## [0.0.1] 2026-07-17
+- Context menu: MyLint formatting
+- Override rule option
+- Requirement down to 1.107.0 for Kiro
+- webpack 5.108.4 compiled successfully in 1201 ms
+- 1778 files, 7.35 MB, 1.129.0
 
-## [0.0.1] - Initial release
+```
+WARNING  This extension consists of 1778 files, out of which 1355 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension. You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore.
+
+INFO  Files included in the VSIX:
+mylint-0.0.1.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ LICENSE.txt [1.06 KB]
+   ├─ changelog.md [2.46 KB]
+   ├─ package.json [2.44 KB]
+   ├─ readme.md [0.71 KB]
+   ├─ dist/ (4 files) [1.71 MB]
+   ├─ media/ (1 file) [45.17 KB]
+   └─ node_modules/ (1767 files) [29.71 MB]
+```
 
 ### Notes
-
-- **Extension activation crash: rolldown runtime artifact**
+- **Can't bundle all, ESM vs CJS**
   Packages in the modern ESLint ecosystem (e.g. `@typescript-eslint/utils`) ship their dist files
   pre-bundled with rolldown (Vite's bundler). When webpack re-bundled them, it pulled in rolldown's
   own runtime stub which has `__require = undefined`. At activation, webpack's CJS interop helper
@@ -24,6 +48,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   `node_modules` with the extension while excluding dev-only packages (`webpack`, `ts-loader`,
   `@types`, etc.).
 
+  Fix: changed `tsconfig.json` to `"module": "CommonJS"`, `"moduleResolution": "node"`, and added
+  `"esModuleInterop": true` so TypeScript emits plain `require()` calls and handles ESM default
+  export interop automatically.
+
 - **Build failure: ts-loader crash with TypeScript 7**
   TypeScript 7 is a full compiler rewrite in Go whose JS API changed enough to break `ts-loader`.
   `ts.sys.fileExists` was `undefined`, causing ts-loader to crash before compiling anything:
@@ -32,18 +60,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   Fix: downgraded `typescript` from `^7.0.2` to `5.8.3`, which is stable and fully supported by
   ts-loader, typescript-eslint, and all other tooling.
 
-- **Build error: static import of ESM-only package under `module: Node16`**
-  With `"module": "Node16"` in `tsconfig.json`, TypeScript treats `.ts` files as CommonJS and
-  refuses to statically `import` ESM-only packages like `@stylistic/eslint-plugin`, emitting:
-  `TS1479: The current file is a CommonJS module ... cannot be imported with 'require'`
-
-  Fix: changed `tsconfig.json` to `"module": "CommonJS"`, `"moduleResolution": "node"`, and added
-  `"esModuleInterop": true` so TypeScript emits plain `require()` calls and handles ESM default
-  export interop automatically.
-
-- **Hardcoded absolute config path**
-  `new ESLint({ overrideConfigFile: 'C:/Users/...' })` only worked on one specific machine.
-  Also, pointing ESLint at a config file causes it to resolve plugins relative to that file's
+- **Can't use overrideConfigFile from EsLint**
+  Pointing ESLint at a config file causes it to resolve plugins relative to that file's
   directory, where no `node_modules` exists, producing "module not found" errors at runtime.
 
   Fix: replaced the file path with a programmatic `overrideConfig` array built directly in
