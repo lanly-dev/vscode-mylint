@@ -22,13 +22,15 @@ export default class MyLint {
     }
 
     const document = editor.document
-    if (document.languageId !== 'typescript' && document.languageId !== 'javascript') {
-      showErrorMessage('ESLint formatting is only supported for TypeScript and JavaScript files')
+    const ext = document.fileName.split('.').pop()?.toLowerCase() || ''
+
+    if (!['ts', 'js', 'mjs', 'cjs', 'json'].includes(ext)) {
+      showErrorMessage(`ESLint formatting is not supported for .${ext} files`)
       return
     }
 
-    const code = document.getText()
     const overrideConfig = await configs()
+    const code = document.getText()
 
     // If the user has defined any rules in settings, replace the defaults entirely
     const userRules = workspace.getConfiguration('mylint').get<Linter.RulesRecord>('rules', {})
@@ -44,10 +46,12 @@ export default class MyLint {
       allowInlineConfig: false
     })
 
+    const virtualFilePath = `file.${ext}`
+
     let results: ESLint.LintResult[] | undefined
     // Lint and auto-fix the file content using flat config
     try {
-      results = await linter.lintText(code)
+      results = await linter.lintText(code, { filePath: virtualFilePath })
     } catch (error) {
       showErrorMessage(`Failed to lint file: ${error}`)
       return
@@ -73,8 +77,7 @@ export default class MyLint {
       if (result.messages.length > 0) {
         showInformationMessage(`Fixed ESLint issues. ${result.messages.length} issue(s) remain`)
       } else showInformationMessage('ESLint auto-fix completed successfully')
-    }
-    else if (result.output === code) {
+    } else if (result.output === code) {
       showInformationMessage(`${result.messages.length} ESLint issue(s) could not be auto-fixed`)
     }
 
@@ -86,5 +89,7 @@ export default class MyLint {
       }).join('\n')
       showInformationMessage(`ESLint remaining issues:\n${errorMsg}`)
     }
+
+    showInformationMessage('ESLint linting completed')
   }
 }
