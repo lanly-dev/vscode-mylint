@@ -5,10 +5,11 @@ All notable changes to the "mylint" extension will be documented in this file.
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [TODO]
-- Underline linting
-- Show warn/error
 - Update to Typescript 7
-- Try Esbuild?
+- Esbuild - if build slow
+- Ignore warns/errors
+- Bracket style
+- Object semicolon
 
 ## [0.0.1] 2026-07-19 🌎⚽🏆
 - Context menu: MyLint formatting
