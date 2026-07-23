@@ -1,6 +1,6 @@
 import { commands, Range, Uri, TextEdit, window, workspace, WorkspaceEdit } from 'vscode'
-import { ESLint, Linter } from 'eslint'
-import getConfigs from './Configs'
+import { ESLint } from 'eslint'
+import EsLintManager from './EsLintManager'
 import { getExt, getVirtualPath, isSupported } from './Utils'
 
 const { showErrorMessage, showInformationMessage, showTextDocument } = window
@@ -30,22 +30,8 @@ export default class MyLint {
       return
     }
 
-    const overrideConfig = await getConfigs()
     const code = document.getText()
-
-    // If the user has defined any rules in settings, replace the defaults entirely
-    const userRules = workspace.getConfiguration('mylint').get<Linter.RulesRecord>('rules', {})
-    if (Object.keys(userRules).length > 0) {
-      const rulesConfig = overrideConfig[overrideConfig.length - 1]
-      rulesConfig.rules = userRules
-    }
-
-    const linter = new ESLint({
-      overrideConfigFile: true,
-      overrideConfig,
-      fix: true,
-      allowInlineConfig: false
-    })
+    const linter = await EsLintManager.getInstance()
 
     let results: ESLint.LintResult[] | undefined
 

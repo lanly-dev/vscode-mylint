@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
-import MyLint from './MyLint'
+import EsLintManager from './EsLintManager'
 import LintStatus from './LintStatus'
+import MyLint from './MyLint'
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -16,7 +17,10 @@ export function activate(context: vscode.ExtensionContext) {
   const d4 = rc('myLinter.showDiagnosticsList', () => lintStatus.showDiagnosticsQuickPick())
   const d5 = vscode.window.onDidChangeActiveTextEditor(() => lintStatus.lintActiveFile())
   const d6 = vscode.workspace.onDidSaveTextDocument(() => lintStatus.lintActiveFile())
-  context.subscriptions.push(d1, d2, d3, d4, d5, d6)
+  const d7 = vscode.workspace.onDidChangeConfiguration((event) => {
+    if (event.affectsConfiguration('myLinter')) EsLintManager.init()
+  })
+  context.subscriptions.push(d1, d2, d3, d4, d5, d6, d7, lintStatus)
 
   // Initial run on startup
   lintStatus.lintActiveFile()
