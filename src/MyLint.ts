@@ -1,6 +1,7 @@
 import { commands, Range, Uri, TextEdit, window, workspace, WorkspaceEdit } from 'vscode'
 import { ESLint, Linter } from 'eslint'
-import configs from './Configs'
+import getConfigs from './Configs'
+import { getExt, getVirtualPath, isSupported } from './Utils'
 
 const { showErrorMessage, showInformationMessage, showTextDocument } = window
 export default class MyLint {
@@ -22,14 +23,14 @@ export default class MyLint {
     }
 
     const document = editor.document
-    const ext = document.fileName.split('.').pop()?.toLowerCase() || ''
+    const ext = getExt()
 
-    if (!['ts', 'js', 'mjs', 'cjs', 'json'].includes(ext)) {
+    if (!isSupported(ext)) {
       showErrorMessage(`ESLint formatting is not supported for .${ext} files`)
       return
     }
 
-    const overrideConfig = await configs()
+    const overrideConfig = await getConfigs()
     const code = document.getText()
 
     // If the user has defined any rules in settings, replace the defaults entirely
@@ -46,12 +47,10 @@ export default class MyLint {
       allowInlineConfig: false
     })
 
-    const virtualFilePath = `file.${ext}`
-
     let results: ESLint.LintResult[] | undefined
-    // Lint and auto-fix the file content using flat config
+
     try {
-      results = await linter.lintText(code, { filePath: virtualFilePath })
+      results = await linter.lintText(code, { filePath: getVirtualPath(ext) })
     } catch (error) {
       showErrorMessage(`Failed to lint file: ${error}`)
       return
