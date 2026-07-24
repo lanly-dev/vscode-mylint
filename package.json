@@ -3,7 +3,7 @@
   "displayName": "MyLint",
   "description": "Mostly for virtual file",
   "publisher": "lanly-dev",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "sponsor": {
     "url": "https://github.com/sponsors/lanly-dev"
   },
@@ -25,6 +25,10 @@
     "mylint"
   ],
   "icon": "media/mylint.png",
+  "galleryBanner": {
+    "color": "#fff",
+    "theme": "light"
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -47,10 +51,10 @@
     "configuration": {
       "title": "MyLint",
       "properties": {
-        "myLinter.enableDiagnostics": {
+        "myLint.enableDiagnostics": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable showing lint diagnostics in VS Code's Problems tab."
+          "description": "Enable/disable showing lint diagnostics in VS Code's Problems tab."
         },
         "mylint.rules": {
           "type": "object",

@@ -7,10 +7,15 @@ A formatter extension that uses ESLint, intended for virtual files and small TS/
   <img src='https://open-vsx.org/favicon.ico' width='12'/>
 </a>
 
-## Commands
+## Extension Settings
+### Commands
 - `mylint: Format File`: Format the current file using the built-in ESLint config
 - `mylint: Open Global ESLint Configuration File`: Open the global ESLint config
 - `mylint: Open Settings`: Open extension settings
+
+### Configurations
+- `myLint.enableDiagnostics`: `false` | Enable/disable showing lint diagnostics in VS Code's Problems tab.
+- `mylint.rules`: ESLint rule overrides for JS/TS files.
 
 ## Release Notes
 

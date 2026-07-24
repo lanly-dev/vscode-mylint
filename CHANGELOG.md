@@ -5,26 +5,41 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [TODO]
 - Update to Typescript 7
 - Esbuild - if build slow
-- Enable warns/errors diagnostic list
 - No Bracket in short statement (need custom rule)
 - Invisible space
 - Illegal characters
 - Limit diagnostic list items
 - Allowed global variables config
 
-## [0.0.2] 2026-07
-- Add diagnosticCollection list (aka problems tab)
-- Add enable problems tab option to prevent issue overwhelming
+## [0.0.2] 2026-07-24
+- Add diagnosticCollection list (the problems tab)
+- Add enable problems tab option
 - Fix `Parsing error: ';' expected.` due to like overlapping js/ts parser
 - Improve rules
+- webpack 5.109.0 compiled successfully in 1362 ms
+- 1491 files, 4.36 MB, 1.130.0, req1.107.0
+```
+WARNING  This extension consists of 1491 files, out of which 1312 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension. You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore.
+
+INFO  Files included in the VSIX:
+mylint-0.0.2.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ LICENSE.txt [1.06 KB]
+   ├─ changelog.md [4.37 KB]
+   ├─ package.json [2.62 KB]
+   ├─ readme.md [1.04 KB]
+   ├─ dist/ (2 files) [72.06 KB]
+   ├─ media/ (1 file) [45.17 KB]
+   └─ node_modules/ (1482 files) [18.21 MB]
 
 ## [0.0.1] 2026-07-19 🌎⚽🏆
 - Context menu: MyLint formatting
 - Override rule option
 - Requirement based to 1.107.0 for Kiro
 - webpack 5.108.4 compiled successfully in 1388 ms
-- 1490 files, 4.36 MB, 1.129.0
-
+- 1490 files, 4.36 MB, 1.129.0, req1.107.0
 ```
 WARNING  This extension consists of 1490 files, out of which 1311 are JavaScript files. For performance reasons, you should bundle your extension: https://aka.ms/vscode-bundle-extension. You should also exclude unnecessary files by adding them to your .vscodeignore: https://aka.ms/vscode-vscodeignore.
 

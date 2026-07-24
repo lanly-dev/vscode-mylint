@@ -47,7 +47,7 @@ export default class LintStatus {
   }
 
   private processResults(uri: vscode.Uri, results: ESLint.LintResult[]) {
-    const config = vscode.workspace.getConfiguration('myLinter')
+    const config = vscode.workspace.getConfiguration('myLint')
     const enableDiagnostics = config.get<boolean>('enableDiagnostics')
 
     // If disabled, clear diagnostics for this URI and return early

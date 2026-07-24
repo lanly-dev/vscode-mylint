@@ -14,15 +14,15 @@ export function activate(context: vscode.ExtensionContext) {
   const d1 = rc('mylint.openConfig', () => MyLint.openConfig(resourceUri))
   const d2 = rc('mylint.openSettings', () => MyLint.openSettings())
   const d3 = rc('mylint.formatFile', () => MyLint.formatFile())
-  const d4 = rc('myLinter.showDiagnosticsList', () => lintStatus.showDiagnosticsQuickPick())
+  const d4 = rc('mylint.showDiagnosticsList', () => lintStatus.showDiagnosticsQuickPick())
   const d5 = vscode.window.onDidChangeActiveTextEditor(() => lintStatus.lintActiveFile())
   const d6 = vscode.workspace.onDidSaveTextDocument(() => lintStatus.lintActiveFile())
   const d7 = vscode.workspace.onDidChangeConfiguration((event) => {
-    if (event.affectsConfiguration('myLinter')) EsLintManager.init()
+    if (event.affectsConfiguration('myLint.rules')) EsLintManager.init()
   })
   const d8 = vscode.workspace.onDidChangeConfiguration((e) => {
-    if (e.affectsConfiguration('myLinter.enableDiagnostics')) {
-      const enabled = vscode.workspace.getConfiguration('myLinter').get<boolean>('enableDiagnostics')
+    if (e.affectsConfiguration('myLint.enableDiagnostics')) {
+      const enabled = vscode.workspace.getConfiguration('myLint').get<boolean>('enableDiagnostics')
       if (enabled) lintStatus.lintActiveFile()
       else lintStatus.clear()
     }
