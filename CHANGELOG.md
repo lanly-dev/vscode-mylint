@@ -10,6 +10,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Illegal characters
 - Limit diagnostic list items
 - Allowed global variables config
+- JSON support
 
 ## [0.0.2] 2026-07-24
 - Add diagnosticCollection list (the problems tab)

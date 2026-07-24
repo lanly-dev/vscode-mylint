@@ -7,5 +7,5 @@
 ```
 npx vsce login lanly-dev
 npx vsce publish
-npx ovsx
+npx ovsx publish
 ```
