@@ -7,10 +7,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [TODO]
 - Update to Typescript 7
 - Esbuild - if build slow
-- Ignore warns/errors
+- Enable warns/errors diagnostic list
 - No Bracket in short statement (need custom rule)
 - Invisible space
 - Illegal characters
+- Limit diagnostic list items
+- Allowed global variables config
 
 ## [0.0.1] 2026-07-19 🌎⚽🏆
 - Context menu: MyLint formatting
