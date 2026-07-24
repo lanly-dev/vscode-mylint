@@ -8,8 +8,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Update to Typescript 7
 - Esbuild - if build slow
 - Ignore warns/errors
-- Bracket style
-- Object semicolon
+- No Bracket in short statement (need custom rule)
+- Invisible space
+- Illegal characters
 
 ## [0.0.1] 2026-07-19 🌎⚽🏆
 - Context menu: MyLint formatting

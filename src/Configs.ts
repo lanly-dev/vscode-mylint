@@ -26,6 +26,18 @@ async function getConfigs(): Promise<Linter.Config[]> {
       rules: {
         '@stylistic/indent': ['error', 2],
         '@stylistic/max-len': ['warn', { code: 120 }],
+        '@stylistic/member-delimiter-style': [
+          'error', {
+            multiline: {
+              delimiter: 'none',
+              requireLast: false
+            },
+            singleline: {
+              delimiter: 'comma',
+              requireLast: false
+            }
+          }
+        ],
         '@typescript-eslint/naming-convention': ['warn', {
           selector: 'import',
           format: ['camelCase', 'PascalCase']
