@@ -20,10 +20,16 @@ export function activate(context: vscode.ExtensionContext) {
   const d7 = vscode.workspace.onDidChangeConfiguration((event) => {
     if (event.affectsConfiguration('myLinter')) EsLintManager.init()
   })
-  context.subscriptions.push(d1, d2, d3, d4, d5, d6, d7, lintStatus)
+  const d8 = vscode.workspace.onDidChangeConfiguration((e) => {
+    if (e.affectsConfiguration('myLinter.enableDiagnostics')) {
+      const enabled = vscode.workspace.getConfiguration('myLinter').get<boolean>('enableDiagnostics')
+      if (enabled) lintStatus.lintActiveFile()
+      else lintStatus.clear()
+    }
+  })
 
-  // Initial run on startup
   lintStatus.lintActiveFile()
+  context.subscriptions.push(d1, d2, d3, d4, d5, d6, d7, d8, lintStatus)
 }
 
 function getResourceUri(context: vscode.ExtensionContext): vscode.Uri {

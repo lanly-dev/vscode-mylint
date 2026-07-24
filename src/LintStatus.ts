@@ -47,6 +47,15 @@ export default class LintStatus {
   }
 
   private processResults(uri: vscode.Uri, results: ESLint.LintResult[]) {
+    const config = vscode.workspace.getConfiguration('myLinter')
+    const enableDiagnostics = config.get<boolean>('enableDiagnostics')
+
+    // If disabled, clear diagnostics for this URI and return early
+    if (!enableDiagnostics) {
+      this.diagnosticCollection.delete(uri)
+      return
+    }
+
     this.currentDiagnostics = []
     const nativeDiagnostics: vscode.Diagnostic[] = []
 
@@ -123,9 +132,14 @@ export default class LintStatus {
     editor.revealRange(new vscode.Range(position, position), vscode.TextEditorRevealType.InCenter)
   }
 
+  public clear() {
+    this.currentDiagnostics = []
+    this.diagnosticCollection.clear()
+  }
+
   // Cleanup method to dispose resources when extension deactivates
   public dispose() {
-    this.diagnosticCollection.clear()
+    this.clear()
     this.diagnosticCollection.dispose()
   }
 }

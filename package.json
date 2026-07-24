@@ -47,6 +47,11 @@
     "configuration": {
       "title": "MyLint",
       "properties": {
+        "myLinter.enableDiagnostics": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable showing lint diagnostics in VS Code's Problems tab."
+        },
         "mylint.rules": {
           "type": "object",
           "default": {},
