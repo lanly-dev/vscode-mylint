@@ -34,6 +34,7 @@ mylint-0.0.2.vsix
    ├─ dist/ (2 files) [72.06 KB]
    ├─ media/ (1 file) [45.17 KB]
    └─ node_modules/ (1482 files) [18.21 MB]
+```
 
 ## [0.0.1] 2026-07-19 🌎⚽🏆
 - Context menu: MyLint formatting
