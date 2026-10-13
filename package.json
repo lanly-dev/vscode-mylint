@@ -1,14 +1,14 @@
 {
   "name": "mylint",
   "displayName": "MyLint",
-  "description": "Mostly for virtual file",
+  "description": "Just another TS/JS Linter and Formatter",
   "publisher": "lanly-dev",
   "version": "0.0.3",
   "sponsor": {
     "url": "https://github.com/sponsors/lanly-dev"
   },
   "engines": {
-    "vscode": "^1.107.0"
+    "vscode": "^1.140.0"
   },
   "categories": [
     "Formatters",
@@ -17,12 +17,12 @@
   "keywords": [
     "eslint",
     "formatter",
-    "JS",
     "javascript",
+    "JS",
     "lint",
+    "mylint",
     "TS",
-    "typescript",
-    "mylint"
+    "typescript"
   ],
   "icon": "media/mylint.png",
   "galleryBanner": {
