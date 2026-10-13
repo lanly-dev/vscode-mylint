@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
 import { ESLint } from 'eslint'
 
-import EsLintManager from './EsLintManager'
-import { getVirtualPath } from './Utils'
+import EsLintManager from './esLintManager'
+import { getVirtualPath } from './utils'
 
 /**
  * VS Code Document Formatting Edit Provider backed by ESLint auto-fix.

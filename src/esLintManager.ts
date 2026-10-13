@@ -1,6 +1,6 @@
 import { ESLint, Linter } from 'eslint'
 import { workspace } from 'vscode'
-import getConfigs from './Configs'
+import getConfigs from './configs'
 
 export default class EsLintManager {
   private static instance: ESLint | null = null

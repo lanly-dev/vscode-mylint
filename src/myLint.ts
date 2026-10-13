@@ -1,12 +1,12 @@
 import { commands, Range, Uri, TextEdit, window, workspace, WorkspaceEdit } from 'vscode'
 import { ESLint } from 'eslint'
-import EsLintManager from './EsLintManager'
-import { getExt, getVirtualPath, isSupported } from './Utils'
+import EsLintManager from './esLintManager'
+import { getExt, getVirtualPath, isSupported } from './utils'
 
 const { showErrorMessage, showInformationMessage, showTextDocument } = window
 export default class MyLint {
   static async openConfig(resourceUri: Uri): Promise<void> {
-    const configFileUri = Uri.joinPath(resourceUri, '..', 'src', 'Configs.ts')
+    const configFileUri = Uri.joinPath(resourceUri, '..', 'src', 'configs.ts')
     const doc = await workspace.openTextDocument(configFileUri)
     await showTextDocument(doc, { preview: true, preserveFocus: true })
   }

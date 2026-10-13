@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import { ESLint } from 'eslint'
-import { getExt, getVirtualPath, isSupported } from './Utils'
-import EsLintManager from './EsLintManager'
+import { getExt, getVirtualPath, isSupported } from './utils'
+import EsLintManager from './esLintManager'
 
 export default class LintStatus {
   // Built-in VS Code Problems integration

@@ -1,9 +1,9 @@
 import { DocumentSelector, ExtensionContext, TextDocument, TextEditor, Uri } from 'vscode'
 import { commands, languages, window, workspace } from 'vscode'
-import EsLintManager from './EsLintManager'
-import LintStatus from './LintStatus'
-import MyLint from './MyLint'
-import MyLintFormatter from './MyLintFormatter'
+import EsLintManager from './esLintManager'
+import LintStatus from './lintStatus'
+import MyLint from './myLint'
+import MyLintFormatter from './myLintFormatter'
 
 /** Context key driving the visibility of the `mylint.formatFile` context menu entry. */
 const MYLINT_IS_DEFAULT_FORMATTER = 'mylint.isDefaultFormatter'
