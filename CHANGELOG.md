@@ -12,6 +12,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Allowed global variables config
 - JSON support
 
+## [0.0.3] 2026-10-13
+- Context menu: hide "MyLint: Format File" when MyLint is already the default formatter for the active language, so it no longer duplicates "Format Document"
+- The check is scoped per document, so it honors both `editor.defaultFormatter` and per-language overrides like `"[typescript]": { "editor.defaultFormatter": "lanly-dev.mylint" }`, and re-checks on editor switch and on settings change
+- Register MyLint as a document formatting provider for JS/TS, so "Format Document" and format on save work once set as the default formatter
+- Rules come strictly from MyLint's own bundled config: a project's ESLint config (`eslint.config.js`, `.eslintrc*`, or the `"eslint"` key in `package.json`) is never read, and inline `/* eslint-disable */` comments in the file are ignored too. The only way to change rules is the `mylint.rules` setting, which replaces the defaults entirely rather than merging with the project config
+
 ## [0.0.2] 2026-07-24
 - Add diagnosticCollection list (the problems tab)
 - Add enable problems tab option

@@ -69,7 +69,7 @@
         {
           "command": "mylint.formatFile",
           "group": "1_modification",
-          "when": "editorTextFocus && editorLangId =~ /^(typescript|javascript)$/"
+          "when": "editorTextFocus && editorLangId =~ /^(typescript|javascript)$/ && !mylint.isDefaultFormatter"
         }
       ]
     }
