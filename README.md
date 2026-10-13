@@ -17,6 +17,29 @@ A formatter extension that uses ESLint, intended for virtual files and small TS/
 - `myLint.enableDiagnostics`: `false` | Enable/disable showing lint diagnostics in VS Code's Problems tab.
 - `mylint.rules`: ESLint rule overrides for JS/TS files.
 
+## Setting MyLint as the Default Formatter
+MyLint is registered as a VS Code document formatter (ID: `lanly-dev.mylint`) for JavaScript and TypeScript.
+
+**Option 1 — one time per file**
+- Open a JS/TS file → `Ctrl+K Ctrl+F` (or right-click → *Format Document With...*)
+- Pick **MyLint** and click *Configure default formatter* when prompted.
+
+**Option 2 — via settings (recommended)**
+```jsonc
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "lanly-dev.mylint",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "lanly-dev.mylint",
+    "editor.formatOnSave": true
+  }
+}
+```
+
+> Formatting uses ESLint's auto-fix, so only rules that have a fixer will change the file. Rules without a fixer will be reported as diagnostics instead.
+
 ## Release Notes
 
 ### 0.0.2

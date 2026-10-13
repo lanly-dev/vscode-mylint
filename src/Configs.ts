@@ -24,6 +24,7 @@ async function getConfigs(): Promise<Linter.Config[]> {
         }
       },
       rules: {
+        '@stylistic/brace-style': ['error', '1tbs'],
         '@stylistic/indent': ['error', 2],
         '@stylistic/max-len': ['warn', { code: 120 }],
         '@stylistic/member-delimiter-style': [
@@ -46,11 +47,14 @@ async function getConfigs(): Promise<Linter.Config[]> {
         'constructor-super': 'warn',
         'eol-last': ['error', 'always'],
         'no-const-assign': 'warn',
+        'no-duplicate-imports': 'error',
+        'no-empty': 'warn',
         'no-this-before-super': 'warn',
         'no-throw-literal': 'warn',
         'no-undef': 'warn',
         'no-unreachable': 'warn',
         'no-unused-vars': 'warn',
+        'no-var': 'error',
         'quote-props': ['error', 'as-needed'],
         'valid-typeof': 'warn',
         curly: ['error', 'multi-line'],

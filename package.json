@@ -3,7 +3,7 @@
   "displayName": "MyLint",
   "description": "Mostly for virtual file",
   "publisher": "lanly-dev",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "sponsor": {
     "url": "https://github.com/sponsors/lanly-dev"
   },
@@ -84,17 +84,17 @@
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.7.0",
-    "typescript-eslint": "^8.65.0"
+    "eslint": "^10.12.0",
+    "typescript-eslint": "^8.71.2"
   },
   "devDependencies": {
     "@types/node": "26.x",
-    "@types/vscode": "^1.107.0",
-    "ovsx": "^1.0.2",
+    "@types/vscode": "^1.140.0",
+    "ovsx": "^1.2.0",
     "ts-loader": "^9.6.2",
     "typescript": "^6.0.3",
-    "webpack": "^5.109.0",
-    "webpack-cli": "^7.2.1"
+    "webpack": "^5.111.1",
+    "webpack-cli": "^7.2.3"
   },
   "repository": {
     "type": "git",
