@@ -75,13 +75,12 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run bundle",
-    "compile": "webpack",
-    "package": "webpack --mode production --devtool hidden-source-map",
-    "watch": "webpack --watch",
+    "vscode:prepublish": "npm run package",
+    "compile": "node esbuild.config.mjs",
+    "package": "node esbuild.config.mjs --production",
+    "watch": "node esbuild.config.mjs --watch",
     "vsce-package": "vsce package",
-    "efix": "eslint . --fix",
-    "bundle": "node esbuild.config.mjs"
+    "efix": "eslint . --fix"
   },
   "dependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -91,13 +90,10 @@
   "devDependencies": {
     "@types/node": "26.x",
     "@types/vscode": "^1.140.0",
-    "ovsx": "^1.2.0",
-    "ts-loader": "^9.6.2",
-    "typescript": "^6.0.3",
-    "webpack": "^5.111.1",
-    "webpack-cli": "^7.2.3",
     "esbuild": "^0.28.2",
-    "jiti": "^2.7.0"
+    "jiti": "^2.7.0",
+    "ovsx": "^1.2.0",
+    "typescript": "^6.0.3"
   },
   "repository": {
     "type": "git",

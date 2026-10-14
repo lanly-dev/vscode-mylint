@@ -69,3 +69,5 @@ node_modules/typescript/lib/tsserverlibrary.js
 node_modules/typescript/lib/typingsInstaller.js
 node_modules/typescript/lib/typesMap.json
 node_modules/typescript/lib/watchGuard.js
+
+node_modules
