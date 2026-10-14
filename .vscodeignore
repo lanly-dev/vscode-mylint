@@ -8,19 +8,17 @@ DEV.md
 media/mylint.svg
 src/
 vsc-extension-quickstart.md
-webpack.config.js
+esbuild.config.mjs
 
 # Dev-only packages (safety net if present during packaging)
 node_modules/@types/**
 node_modules/@vscode/**
+node_modules/esbuild/**
+node_modules/@esbuild/**
 node_modules/ovsx/**
 node_modules/standard/**
 node_modules/standard-engine/**
-node_modules/ts-loader/**
 node_modules/typescript/bin/**
-node_modules/webpack/**
-node_modules/webpack-cli/**
-node_modules/webpack-*/**
 
 # Runtime-only trimming for shipped dependencies
 node_modules/@eslint/**/dist/esm/**

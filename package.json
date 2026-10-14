@@ -102,5 +102,10 @@
   "bugs": {
     "url": "https://github.com/lanly-dev/vscode-mylint/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "allowScripts": {
+    "@vscode/vsce-sign@2.0.9": true,
+    "esbuild@0.28.2": true,
+    "keytar@7.9.0": true
+  }
 }

@@ -28,14 +28,30 @@
 import esbuild from 'esbuild'
 import fs from 'node:fs'
 
-await esbuild.build({
+// Build modes, driven by the npm scripts:
+//   npm run compile  -> dev build, emits dist/extension.js.map
+//   npm run package  -> release build, minified, no sourcemap
+//   npm run watch    -> dev build, rebuilds on save
+const argv = process.argv.slice(2)
+const isProduction = argv.includes('--production')
+const isWatch = argv.includes('--watch')
+
+// Start every non-watch build from a clean output directory, so a dev
+// sourcemap is never left behind in a release build.
+if (!isWatch) fs.rmSync('./dist', { recursive: true, force: true })
+
+const options = {
   entryPoints: ['./src/extension.ts'],
   bundle: true,
   platform: 'node',
   format: 'cjs',
+  target: 'node20',
   external: ['vscode'],
   outfile: './dist/extension.js',
   logLevel: 'info',
+  // Sourcemaps are for local debugging only; they are stripped from releases.
+  sourcemap: !isProduction,
+  minify: isProduction,
   plugins: [
     {
       name: 'rolldown-interop-fix',
@@ -59,5 +75,14 @@ await esbuild.build({
       }
     }
   ]
-})
-console.log('esbuild bundle done')
+}
+
+if (isWatch) {
+  const context = await esbuild.context(options)
+  await context.watch()
+  console.log('esbuild watching for changes...')
+} else {
+  await esbuild.build(options)
+  console.log(`esbuild bundle done${isProduction ? ' (production)' : ''}`)
+}
+
