@@ -12,10 +12,9 @@
 	"js/ts.tsc.autoDetect": "off",
 	"cSpell.words": [
 		"efix",
-		"Kiro",
+		"esbuild",
 		"lanly",
 		"mylint",
-		"sfix",
 		"vscodeignore",
 		"vsixmanifest"
 	],
