@@ -14,7 +14,6 @@ export default class LintStatus {
     ruleId: string
   }> = []
 
-
   constructor() {
     // Initialize diagnostic collection to populate the native Problems tab
     this.diagnosticCollection = vscode.languages.createDiagnosticCollection('myLinter')
@@ -118,9 +117,7 @@ export default class LintStatus {
       placeHolder: 'Select an issue to jump to line'
     })
 
-    if (selected) {
-      this.jumpToLine(selected.diagnostic.line - 1, selected.diagnostic.column - 1)
-    }
+    if (selected) this.jumpToLine(selected.diagnostic.line - 1, selected.diagnostic.column - 1)
   }
 
   private jumpToLine(line: number, column: number) {

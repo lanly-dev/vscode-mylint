@@ -13,7 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.3] 2026-10-15
 - Context menu: hide "MyLint: Format File" when MyLint is the default formatter.
 - Register MyLint as a document formatting provider for JS/TS
-- Switch to esbuild 🤯
+- Switch to esbuild 🤯🚀
 - 8 files, 1.88 MB, 1.141.0, req1.140.0
 ```
 mylint-0.0.3.vsix

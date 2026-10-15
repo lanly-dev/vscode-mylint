@@ -1,5 +1,6 @@
 import { commands, Range, Uri, TextEdit, window, workspace, WorkspaceEdit } from 'vscode'
 import { ESLint } from 'eslint'
+
 import EsLintManager from './esLintManager'
 import { getExt, getVirtualPath, isSupported } from './utils'
 

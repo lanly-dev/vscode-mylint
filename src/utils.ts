@@ -8,7 +8,6 @@ function getExt() {
   return ext
 }
 
-
 function getVirtualPath(ext: string) {
   return `file.${ext}`
 }
@@ -16,6 +15,5 @@ function getVirtualPath(ext: string) {
 function isSupported(ext: string) {
   return ['ts', 'js', 'mjs', 'cjs', 'json'].includes(ext)
 }
-
 
 export { getExt, getVirtualPath, isSupported }

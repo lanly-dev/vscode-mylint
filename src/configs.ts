@@ -1,5 +1,5 @@
-import typescriptEslint from 'typescript-eslint'
 import { Linter } from 'eslint'
+import typescriptEslint from 'typescript-eslint'
 
 async function getConfigs(): Promise<Linter.Config[]> {
   const stylistic = (await import('@stylistic/eslint-plugin')).default

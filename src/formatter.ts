@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
 import { ESLint } from 'eslint'
 
-import EsLintManager from './esLintManager'
 import { getVirtualPath } from './utils'
+import EsLintManager from './esLintManager'
 
 /**
  * VS Code Document Formatting Edit Provider backed by ESLint auto-fix.
@@ -24,9 +24,7 @@ export default class MyLintFormatter implements vscode.DocumentFormattingEditPro
     return this.supportedLangs.has(document.languageId)
   }
 
-  public async provideDocumentFormattingEdits(
-    document: vscode.TextDocument
-  ): Promise<vscode.TextEdit[]> {
+  public async provideDocumentFormattingEdits(document: vscode.TextDocument): Promise<vscode.TextEdit[]> {
     if (!this.supports(document)) return []
 
     const code = document.getText()
