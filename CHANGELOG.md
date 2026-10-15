@@ -1,18 +1,36 @@
 # Change Log
-All notable changes to the "mylint" extension will be documented in this file. \
+All notable changes to the "mylint" extension will be documented in this file.\
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [TODO]
-- Update to Typescript 7
-- Invisible space
-- Illegal characters
-- Limit diagnostic list items
 - Allowed global variables config
+- Illegal characters
+- Invisible space
 - JSON support
+- Limit diagnostic list items
+- Update to Typescript 7
 
-## [0.0.3] 2026-10-13
+## [0.0.3] 2026-10-15
 - Context menu: hide "MyLint: Format File" when MyLint is the default formatter.
 - Register MyLint as a document formatting provider for JS/TS
+- Switch to esbuild 🤯
+- 8 files, 1.88 MB, 1.141.0, req1.140.0
+```
+mylint-0.0.3.vsix
+├─ [Content_Types].xml
+├─ extension.vsixmanifest
+└─ extension/
+   ├─ LICENSE.txt [1.06 KB]
+   ├─ changelog.md [5.33 KB]
+   ├─ package.json [2.85 KB]
+   ├─ readme.md [1.84 KB]
+   ├─ dist/
+   │  └─ extension.js [6.7 MB]
+   └─ media/
+      └─ mylint.png [45.17 KB]
+
+The file extension/dist/extension.js is large (6.7 MB)
+```
 
 ### Notes
 - Rules come strictly from MyLint's own bundled config: a project's ESLint config (`eslint.config.js`, `.eslintrc*`, or the `"eslint"` key in `package.json`) is never read, and inline `/* eslint-disable */` comments in the file are ignored too. The only way to change rules is the `mylint.rules` setting, which replaces the defaults entirely rather than merging with the project config

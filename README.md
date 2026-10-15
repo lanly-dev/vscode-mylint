@@ -42,7 +42,7 @@ MyLint is registered as a VS Code document formatter (ID: `lanly-dev.mylint`) fo
 
 ### 0.0.3
 - Register MyLint as a document formatting provider for JS/TS
-- Context menu: hide "MyLint: Format File" when MyLint is the default formatter
+- Context menu: hide "MyLint: Format File" when MyLint is set as default formatter
 
 ### 0.0.2
 - Fixed `Parsing error: ';' expected.`
