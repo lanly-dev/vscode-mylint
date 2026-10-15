@@ -79,6 +79,8 @@
     "compile": "node esbuild.js",
     "package": "node esbuild.js --production",
     "watch": "node esbuild.js --watch",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "vsce-package": "vsce package",
     "efix": "eslint . --fix"
   },

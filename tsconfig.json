@@ -1,8 +1,12 @@
 {
 	"compilerOptions": {
-		"module": "CommonJS",
-		"moduleResolution": "node10",
-		"ignoreDeprecations": "6.0",
+		// "preserve" + "bundler" is the pairing for code that is bundled by
+		// esbuild: tsc only type-checks here (`tsc --noEmit --watch`), it never
+		// emits. It also honours package "exports" maps, which is required by
+		// typescript-eslint, whose index.d.ts re-exports from the
+		// "@typescript-eslint/utils/ts-eslint" subpath export.
+		"module": "preserve",
+		"moduleResolution": "bundler",
 		"esModuleInterop": true,
 		"target": "ES2022",
 		"lib": [

@@ -48,6 +48,7 @@ export function activate(context: ExtensionContext) {
   const formatter = new MyLintFormatter()
   const tsSelector: DocumentSelector = { scheme: 'file', language: 'typescript' }
   const jsSelector: DocumentSelector = { scheme: 'file', language: 'javascript' }
+
   const d1a = languages.registerDocumentFormattingEditProvider(tsSelector, formatter)
   const d1b = languages.registerDocumentFormattingEditProvider(jsSelector, formatter)
 
